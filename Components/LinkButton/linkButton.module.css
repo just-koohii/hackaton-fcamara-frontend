@@ -1,0 +1,36 @@
+.root{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #F1F1F1;
+    font-size: 14pt;
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.root:hover{
+    background-color: #D1D1D1;
+    transition: all 300ms ease-in-out;
+}
+
+.root:active{
+    color: #FFF;
+    background-color: #9F9F9F;
+    transition: all 300ms ease-in-out;
+}
+
+.active{
+    color: #FFF;
+    background-color: #5D5D5D;
+    transition: all 300ms ease-in-out;
+}
+
+.active:hover{
+    background-color: #5D5D5D;
+}
+
+.active:active{
+    background-color: #5D5D5D;
+}

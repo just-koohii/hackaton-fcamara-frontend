@@ -1,0 +1,21 @@
+.root{
+  padding: 0 0.5rem;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+  height: 100%;    
+}
+
+.tela01{
+  background: linear-gradient(37deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%); 
+}
+
+.tela02{
+  background: linear-gradient(198deg, rgba(121,44,9,1) 0%, rgba(255,151,0,1) 100%);
+}
+
+.tela03{
+  background: linear-gradient(58deg, rgba(121,9,112,1) 0%, rgba(0,114,255,1) 100%);
+}
