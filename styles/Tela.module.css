@@ -1,16 +1,69 @@
-.root{
-  padding: 0 0.5rem;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;  
-  height: 100%;    
+.root {
+  background-color: rgb(95, 95, 247);
+  list-style-type: none;
+  margin: 0;
+  padding:0;
+  width: 250px;
+  border-radius: 2px;
+  border: 1px rgb(93, 93, 241);
+  position:absolute;
+  left:50%;
+  top:30%;
+  margin-left:-110px;
+  margin-top:-40px;
+
 }
 
-.tela01{
-  background: linear-gradient(37deg, rgba(9,9,121,1) 0%, rgba(0,212,255,1) 100%); 
+.root2 {
+
+  list-style-type: none;
+  margin: 0;
+  width: 250px;
+  background-color: rgb(133, 159, 231);
+  color: black;
+  justify-content: center;
+  
 }
+.root21 {
+  
+  list-style-type: none;
+  margin: 0;
+  padding:0;
+  width: 250px;
+  background-color:   rgb(217, 226, 248);
+  justify-content: center;
+
+
+}
+.root31 {
+  
+  list-style-type: none;
+  margin: 0;
+  padding:0;
+  width: 250px;
+  background-color:   rgb(217, 226, 248);
+  justify-content: center;
+ 
+
+}
+.root4 {
+
+  font: bold 12px/24px arial, helvetica, sans-aerif;
+  padding:0px;
+  text-decoration: none;
+  text-align:center;
+  color:rgb(255, 255, 255);
+  background: blue;
+  width:120px;
+  height:24px;
+  display:block;
+  cursor: pointer;
+  border: 1px;
+  justify-content: center;
+ 
+
+}
+
 
 .tela02{
   background: linear-gradient(198deg, rgba(121,44,9,1) 0%, rgba(255,151,0,1) 100%);
