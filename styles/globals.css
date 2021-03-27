@@ -13,7 +13,7 @@ body {
   display: flex;
   height: 100%;
   width: 100%;
-  background-color: rgb(226, 162, 124);
+  background: linear-gradient(198deg, rgb(39, 36, 35) 0%, rgb(107, 103, 101) 100%);
 }
 
 #__next{

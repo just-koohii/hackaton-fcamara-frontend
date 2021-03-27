@@ -8,15 +8,17 @@ export default class MyApp extends App<AppProps> {
     const { Component, pageProps } = this.props;
 
     return (
-      <>
+      <> 
         <NavBar>
-          <LinkButton href="/" label="home" />
-          <LinkButton href="/tela1" label="tela1" />
-          <LinkButton href="/tela2" label="tela2" />
-          <LinkButton href="/tela3" label="tela3" />
+          <LinkButton href="/" label="Home" />
+          <LinkButton href="/tela1" label="Cadastro" />
+          <LinkButton href="/tela2" label="Doar" />
+          <LinkButton href="/tela3" label="Contato" />
         </NavBar>
         <Component {...pageProps} />
+      
       </>
+      
     );
   }
 }

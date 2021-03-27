@@ -5,18 +5,27 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Projeto FC</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <div className={styles.menu}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        
+          Projeto FC
         </h1>
 
+      </div>
+      <div className={styles.subt}>
+      <h2 className={styles.subt}> 
+        </h2>
+        <h2>
+       <a href="/"> <a href="/" /> Sobre o Projeto </a>
+        </h2>
+        </div>
         <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
+           {' '}
+          <a href="/tela1">  <a href="/tela1"/> Cadastrar </a> 
         </p>
 
         <div className={styles.grid}>
@@ -48,7 +57,7 @@ export default function Home() {
             </p>
           </a>
         </div>
-      </main>
+      
 
       <footer className={styles.footer}>
         <a
@@ -56,10 +65,10 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{" "}
+          Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
     </div>
-  );
+  )
 }
