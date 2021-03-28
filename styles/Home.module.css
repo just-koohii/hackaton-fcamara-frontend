@@ -6,19 +6,7 @@
   align-items: center;
   color: whitesmoke;
 }
-.name {
 
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: rgb(179, 95, 47); 
-  background-color: brown;
- 
-
-}
 
 .main {
   padding: 5rem 0;
