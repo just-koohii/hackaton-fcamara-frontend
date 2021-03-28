@@ -2,6 +2,7 @@ import { PureComponent } from "react";
 import { Heading } from "@Components";
 import styles from "../styles/Tela.module.css";
 
+
 export default class Tela1 extends PureComponent {
     
     render() {
@@ -58,6 +59,10 @@ export default class Tela1 extends PureComponent {
                     <input type= "text" name="Nome" placeholder="Nome dos Pais" onChange={handleInputChange}/>
                     <br></br>
                     <input type= "text" name="Nome" placeholder="Nome do Aluno"onChange={handleInputChange}/>
+                    <br></br>
+                    <input type= "text" name="Nome" placeholder="Nome da Escola"onChange={handleInputChange}/>
+                    <br></br>
+                    <input type= "text" name="Nome" placeholder="Responsável pelo cadastro"onChange={handleInputChange}/>
                     <br></br>
                     <input type= "text" name="email" placeholder="E-mail"onChange={handleInputChange}/>
                     <br></br>
