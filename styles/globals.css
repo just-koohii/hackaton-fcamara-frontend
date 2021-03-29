@@ -1,29 +1,5 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-
-}
-
-html,
-body {
-  
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  display: flex;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(198deg, rgb(39, 36, 35) 0%, rgb(107, 103, 101) 100%);
-}
-
-#__next{
+#__next, main{
   display: flex;
   flex: 1;
   flex-direction: column;
 }
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
