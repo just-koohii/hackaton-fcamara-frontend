@@ -27,7 +27,9 @@ export default class MyApp extends App {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <NavBar />
-          <Component {...pageProps} />
+          <main>
+            <Component {...pageProps} />
+          </main>
         </ThemeProvider>
       </>
     );

@@ -2,7 +2,7 @@ import { Typography, Container } from '@material-ui/core';
 
 export default function Home() {
   return (
-    <main>
+    <>
       <Typography align="center" variant="h1" gutterBottom>
         Projeto FC
       </Typography>
@@ -27,6 +27,6 @@ export default function Home() {
           lobortis.
         </Typography>
       </Container>
-    </main>
+    </>
   );
 }
