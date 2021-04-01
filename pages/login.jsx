@@ -31,7 +31,7 @@ export default function Login() {
   };
 
   return (
-    <main>
+    <>
       <Box
         display="flex"
         flexDirection="column"
@@ -86,7 +86,7 @@ export default function Login() {
           </form>
         </Paper>
       </Box>
-    </main>
+    </>
   );
 }
 
