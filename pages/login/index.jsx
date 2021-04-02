@@ -1,14 +1,27 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Carousel from 'react-img-carousel';
 import { Container, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { LinkButton } from '@components';
+import Carousel from 'react-img-carousel';
+import 'react-img-carousel/lib/carousel.css';
 
-require('react-img-carousel/lib/carousel.css');
+const navigation = [
+  {
+    label: 'doador',
+    href: 'doador',
+  },
+  {
+    label: 'escola',
+    href: 'escola',
+  },
+  {
+    label: 'pai / responsavel',
+    href: 'pais',
+  },
+];
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ spacing }) => ({
   buttons: {
-    padding: theme.spacing(2),
+    padding: spacing(2),
     alignSelf: 'center',
   },
   buttonGrid: {
@@ -32,7 +45,6 @@ export default function preLogin() {
         <Grid item xs={12} md={8} className={classes.divImages}>
           <Carousel
             viewportWidth="100%"
-            cellPadding={0}
             transitionDuration="2000"
             autoplay
             draggable
@@ -45,33 +57,18 @@ export default function preLogin() {
         </Grid>
         <Grid item xs={12} md={4}>
           <Grid container spacing={3} className={classes.buttonGrid}>
-            <Grid item xs={12} className={classes.gridButton}>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.buttons}
-              >
-                SOU DOADOR
-              </Button>
-            </Grid>
-            <Grid item xs={12} className={classes.gridButton}>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.buttons}
-              >
-                SOU ESCOLA
-              </Button>
-            </Grid>
-            <Grid item xs={12} className={classes.gridButton}>
-              <Button
-                variant="contained"
-                color="primary"
-                className={classes.buttons}
-              >
-                SOU PAI / RESPONSAVEL
-              </Button>
-            </Grid>
+            {navigation.map(({ label, href }) => (
+              <Grid key={label} item xs={12} className={classes.gridButton}>
+                <LinkButton
+                  variant="contained"
+                  color="primary"
+                  className={classes.buttons}
+                  href={`/login/${href}`}
+                >
+                  {`sou ${label}`}
+                </LinkButton>
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Grid>

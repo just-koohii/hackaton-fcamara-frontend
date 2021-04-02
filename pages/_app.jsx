@@ -20,7 +20,7 @@ export default class MyApp extends App {
           />
           <meta name="theme-color" content={theme.palette.primary.main} />
 
-          <title>Projeto FC</title>
+          <title>Elo</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
 

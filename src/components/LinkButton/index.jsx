@@ -1,15 +1,12 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { PureComponent } from 'react';
 import Link from 'next/link';
+import { Button } from '@material-ui/core';
 
-export class LinkButton extends PureComponent {
-  render() {
-    const { href, children } = this.props;
-
-    return (
-      <Link href={href} as={href}>
-        <a>{children}</a>
-      </Link>
-    );
-  }
+export function LinkButton({ href, children, ...rest }) {
+  return (
+    <Link href={href} passHref>
+      <Button {...rest} component="a">
+        {children}
+      </Button>
+    </Link>
+  );
 }

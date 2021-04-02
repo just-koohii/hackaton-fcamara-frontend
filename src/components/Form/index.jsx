@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { Paper, Grid, TextField, Button } from '@material-ui/core';
+import { Paper, Grid, Typography, TextField, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(({ spacing }) => ({
   paper: {
@@ -12,24 +12,32 @@ const useStyles = makeStyles(({ spacing }) => ({
   },
 }));
 
-export function Form(props) {
+export function Form({ onSubmit, error }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const classes = useStyles();
 
-  const { onSubmit } = props;
+  const handleSubmit = () => {
+    onSubmit(email, senha);
+  };
 
   return (
     <Paper elevation={3} className={classes.paper}>
-      <form className={classes.form} onSubmit={onSubmit}>
+      <form className={classes.form} onSubmit={handleSubmit}>
         <Grid container spacing={4}>
+          {error && (
+            <Grid item xs={12}>
+              <Typography variant="body2" align="center" color="error">
+                <b>{error.toUpperCase()}</b>
+              </Typography>
+            </Grid>
+          )}
           <Grid item xs={12}>
             <TextField
               variant="outlined"
               label="Email"
               placeholder="Email"
               type="email"
-              inputProps={{ maxLength: 35 }}
               value={email}
               onChange={({ target: { value } }) => setEmail(value)}
               fullWidth
@@ -38,11 +46,10 @@ export function Form(props) {
           <Grid item xs={12}>
             <TextField
               variant="outlined"
-              label="senha"
+              label="Senha"
               type="password"
               inputProps={{
-                maxLength: 10,
-                minLength: 5,
+                minLength: 8,
               }}
               value={senha}
               onChange={({ target: { value } }) => setSenha(value)}

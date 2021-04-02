@@ -1,44 +1,50 @@
-import { PureComponent } from 'react';
-import { AppBar, Toolbar, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { LinkButton } from '../LinkButton';
+
+const useStyles = makeStyles(({ palette: { primary }, spacing }) => {
+  return {
+    logo: {
+      marginRight: 'auto',
+    },
+    buttonLabel: {
+      borderBottom: `solid ${primary.light} ${spacing(0.4)}px`,
+    },
+  };
+});
 
 const rotas = [
   {
-    nome: 'home',
+    nome: 'conheça o projeto',
     href: '/',
   },
   {
-    nome: 'login',
+    nome: 'contato',
     href: '/login',
   },
   {
-    nome: 'doar',
+    nome: 'FAQ',
     href: '/doar',
-  },
-  {
-    nome: 'contato',
-    href: '/contato',
   },
 ];
 
-export class NavBar extends PureComponent {
-  render() {
-    return (
-      <AppBar position="static">
-        <Toolbar>
-          {rotas.map(({ nome, href }) => (
-            <Button
-              key={nome}
-              variant="text"
-              color="inherit"
-              href={href}
-              as={LinkButton}
-            >
-              {nome}
-            </Button>
-          ))}
-        </Toolbar>
-      </AppBar>
-    );
-  }
+export function NavBar() {
+  const classes = useStyles();
+
+  return (
+    <AppBar position="static" color="transparent" elevation={0}>
+      <Toolbar>
+        <img className={classes.logo} src="/vercel.svg" height="30" alt="" />
+        {rotas.map(({ nome, href }) => (
+          <LinkButton
+            key={nome}
+            classes={{ label: classes.buttonLabel }}
+            href={href}
+          >
+            <Typography variant="body1">{nome}</Typography>
+          </LinkButton>
+        ))}
+      </Toolbar>
+    </AppBar>
+  );
 }

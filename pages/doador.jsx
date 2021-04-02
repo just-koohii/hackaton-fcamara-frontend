@@ -1,4 +1,3 @@
-import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Typography, ButtonBase } from '@material-ui/core';
 
