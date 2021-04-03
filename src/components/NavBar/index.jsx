@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, forwardRef } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -59,6 +59,9 @@ export function NavBar() {
   const [mobileDrawer, setMobileDrawer] = useState(false);
   const classes = useStyles();
 
+  // eslint-disable-next-line no-unused-vars
+  const renderLink = forwardRef((props, _) => <LinkButton {...props} />);
+
   const toggleDrawer = () => {
     setMobileDrawer(!mobileDrawer);
   };
@@ -76,7 +79,9 @@ export function NavBar() {
           >
             <MenuIcon />
           </IconButton>
-          <img className={classes.logo} src="/vercel.svg" height="30" alt="" />
+
+          <img className={classes.logo} src="/logo.svg" height="80" alt="" />
+
           <Hidden xsDown implementation="js">
             {rotas.map(({ nome, href }) => (
               <LinkButton
@@ -90,6 +95,7 @@ export function NavBar() {
           </Hidden>
         </Toolbar>
       </AppBar>
+
       <nav>
         <Hidden smUp implementation="js">
           <Drawer
@@ -106,10 +112,10 @@ export function NavBar() {
             <List>
               {rotas.map(({ nome, href }) => (
                 <ListItem
-                  button
-                  component={LinkButton}
-                  href={href}
                   key={nome}
+                  button
+                  component={renderLink}
+                  href={href}
                   onClick={toggleDrawer}
                 >
                   <ListItemText primary={nome} />

@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  focusVisible: {},
   imageButton: {
     position: 'absolute',
     left: 0,
@@ -107,10 +108,9 @@ export default function Doador() {
           </Typography>
         </Grid>
 
-        {images.map(({ url, title }) => (
-          <Grid item xs={12} md={6} className={classes.gridButton}>
+        {images.map(({ url, title }, i) => (
+          <Grid key={title} item xs={12} md={6} className={classes.gridButton}>
             <ButtonBase
-              key={title}
               focusRipple
               className={classes.buttonBase}
               focusVisibleClassName={classes.focusVisible}
@@ -127,7 +127,7 @@ export default function Doador() {
                   color="inherit"
                   className={classes.imageTitle}
                 >
-                  {title}
+                  {title + i}
                   <span className={classes.imageMarked} />
                 </Typography>
               </span>
@@ -142,3 +142,19 @@ export default function Doador() {
     </Container>
   );
 }
+
+export const getServerSideProps = ({
+  req: {
+    cookies: { token },
+  },
+}) => {
+  if (!token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login',
+      },
+    };
+
+  return { props: {} };
+};

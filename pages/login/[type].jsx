@@ -3,9 +3,13 @@ import { Box, Typography } from '@material-ui/core';
 import { Form } from '@components';
 
 export default function Login() {
-  const {
-    query: { type },
-  } = useRouter();
+  const router = useRouter();
+
+  const { type } = router.query;
+
+  const onSubmit = () => {
+    router.push(`/dashboard/${type}`);
+  };
 
   return (
     <>
@@ -16,23 +20,34 @@ export default function Login() {
         justifyContent="center"
       >
         <Typography variant="h1" paragraph>
-          Login - {type}
+          Login
         </Typography>
 
-        <Form />
+        <Form type={type} onSubmit={onSubmit} />
       </Box>
     </>
   );
 }
 
-export const getServerSideProps = ({ params: { type } }) => {
+export const getServerSideProps = ({ req, params }) => {
+  const { type } = params;
+
   if (type !== 'doador' && type !== 'escola' && type !== 'pais')
     return {
       redirect: {
-        permanent: true,
+        permanent: false,
         destination: '/login',
       },
     };
 
+  const { cookies } = req;
+
+  if (cookies.token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/dashboard/${cookies.type}`,
+      },
+    };
   return { props: {} };
 };
