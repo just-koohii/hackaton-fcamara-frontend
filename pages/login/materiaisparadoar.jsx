@@ -72,7 +72,7 @@ function Buscacep() {
                 ),
               }}
             />
-            <Button variant="contained" color="primary" href="#contained-buttons" className={classes.button}>
+            <Button variant="contained" color="primary" href="../listaescolas" className={classes.button}>
                 Pesquisar
             </Button>
           </Grid>

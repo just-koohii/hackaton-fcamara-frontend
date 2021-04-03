@@ -3,7 +3,7 @@ import  React  from  'react' ;
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import {  
-    Button,
+    Paper,
     Grid,
     Box,
     Typography,
@@ -13,7 +13,7 @@ import {
     IconButton 
 } from '@material-ui/core';
 
-export default function listaLojas() {
+export default function listaEscolas() {
     
     const useStyles = makeStyles(({ spacing }) => ({
         gridList: {
@@ -38,30 +38,30 @@ export default function listaLojas() {
 
     const tileData = [
         {
-            img: 'loja1',
-            title: 'Loja 1',
+            img: 'escola',
+            title: 'Escola 1',
             src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NYCS-bull-trans-1.svg/1024px-NYCS-bull-trans-1.svg.png',
             width: '200px',
             height: '200px',
         },
         {
-            img: 'loja2',
-            title: 'Loja 2',
+            img: 'escola2',
+            title: 'Escola 2',
             src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/NYCS-bull-trans-2.svg/768px-NYCS-bull-trans-2.svg.png',
             width: '200px',
             height: '200px',
         },
         {
-            img: 'loja3',
-            title: 'Loja 3',
+            img: 'Escola3',
+            title: 'Escola 3',
             src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/NYCS-bull-trans-3.svg/1200px-NYCS-bull-trans-3.svg.png',
             width: '200px',
             height: '200px',
         },
 
         {
-            img: 'loja4',
-            title: 'Loja 4',
+            img: 'Escola4',
+            title: 'Escola 4',
             src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/NYCS-bull-trans-4.svg/1200px-NYCS-bull-trans-4.svg.png',
             width: '200px',
             height: '200px',
@@ -78,9 +78,8 @@ export default function listaLojas() {
         >
           <Grid xs={12} md={12} className={classes.form}>
             <Typography variant="h5">
-                Fulano, listaremos as lojas parceiras do projeto. 
-                Todas elas oferecem descontos para os produtos a serem doados e efetuam a entrega 
-                diretamente na escola escolhida. 
+                Aqui estão as escolas mais próximas à sua localização.
+                Clique nas imagens e verifique o que elas estão precisando.
             </Typography>
             </Grid>
             <GridList className={classes.gridList} cols={4}>
@@ -94,7 +93,7 @@ export default function listaLojas() {
                             title: classes.title,
                             padding: classes.gridListTile,
                          }}
-                         href="loja"
+                         href=""
                      />
                     </GridListTile>
                 ))}
