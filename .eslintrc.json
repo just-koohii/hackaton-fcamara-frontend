@@ -23,7 +23,7 @@
       "node":{
         "extensions": [".js", ".jsx"],
         "baseUrl":".",
-        "paths":["components"]
+        "paths":["src/components","services"]
       }
       
     }
