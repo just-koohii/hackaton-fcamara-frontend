@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Box, Typography } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { Form } from '@components';
 
 export default function Login() {
@@ -15,14 +15,11 @@ export default function Login() {
     <>
       <Box
         display="flex"
+        flex={1}
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
       >
-        <Typography variant="h1" paragraph>
-          Login
-        </Typography>
-
         <Form type={type} onSubmit={onSubmit} />
       </Box>
     </>

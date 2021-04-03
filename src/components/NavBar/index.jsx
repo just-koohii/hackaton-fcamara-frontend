@@ -8,11 +8,15 @@ import {
   Drawer,
   List,
   ListItem,
+  Divider,
   ListItemText,
 } from '@material-ui/core';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { makeStyles } from '@material-ui/core/styles';
 import { Menu as MenuIcon } from '@material-ui/icons';
 import { LinkButton } from '../LinkButton';
+import { AuthMenu } from '../AuthMenu';
 
 const useStyles = makeStyles(
   ({ spacing, breakpoints, palette: { primary } }) => {
@@ -23,8 +27,9 @@ const useStyles = makeStyles(
           display: 'none',
         },
       },
-      logo: {
-        marginRight: 'auto',
+      buttonContainer: {
+        marginLeft: 'auto',
+        marginRight: spacing(2),
       },
       buttonLabel: {
         borderBottom: `solid ${primary.light} ${spacing(0.4)}px`,
@@ -47,15 +52,16 @@ const rotas = [
   },
   {
     nome: 'contato',
-    href: '/login',
+    href: '/contato',
   },
   {
     nome: 'FAQ',
-    href: '/doar',
+    href: '/faq',
   },
 ];
 
 export function NavBar() {
+  const router = useRouter();
   const [mobileDrawer, setMobileDrawer] = useState(false);
   const classes = useStyles();
 
@@ -76,22 +82,28 @@ export function NavBar() {
             edge="start"
             className={classes.menuButton}
             onClick={toggleDrawer}
+            focusRipple={mobileDrawer}
           >
-            <MenuIcon />
+            <MenuIcon fontSize="large" />
           </IconButton>
 
-          <img className={classes.logo} src="/logo.svg" height="80" alt="" />
+          {router.pathname !== '/' && (
+            <Image src="/logo.svg" height={110} width={151} alt="" />
+          )}
 
           <Hidden xsDown implementation="js">
-            {rotas.map(({ nome, href }) => (
-              <LinkButton
-                key={nome}
-                classes={{ label: classes.buttonLabel }}
-                href={href}
-              >
-                <Typography variant="body1">{nome}</Typography>
-              </LinkButton>
-            ))}
+            <div className={classes.buttonContainer}>
+              {rotas.map(({ nome, href }) => (
+                <LinkButton
+                  key={nome}
+                  classes={{ label: classes.buttonLabel }}
+                  href={href}
+                >
+                  <Typography variant="body1">{nome}</Typography>
+                </LinkButton>
+              ))}
+            </div>
+            <AuthMenu />
           </Hidden>
         </Toolbar>
       </AppBar>
@@ -122,6 +134,8 @@ export function NavBar() {
                 </ListItem>
               ))}
             </List>
+            <Divider />
+            <AuthMenu mobile component={renderLink} onClick={toggleDrawer} />
           </Drawer>
         </Hidden>
       </nav>

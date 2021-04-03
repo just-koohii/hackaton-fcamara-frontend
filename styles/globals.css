@@ -1,9 +1,17 @@
+html{
+  height: 100vh;
+}
+
+body,#__next{
+  height: 100%;
+}
+
 #__next, main{
   display: flex;
-  flex: 1;
   flex-direction: column;
 }
 
 main {
+  flex: 1;
   padding: 24px; 
 }

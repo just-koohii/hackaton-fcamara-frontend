@@ -1,5 +1,4 @@
 import { Container, Grid, Typography, ButtonBase } from '@material-ui/core';
-import api from '@services/api';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -75,6 +74,10 @@ const useStyles = makeStyles((theme) => ({
     left: 'calc(50% - 9px)',
     transition: theme.transitions.create('opacity'),
   },
+  center: {
+    alignContent: 'center',
+    textAlign: 'center',
+  },
 }));
 
 const images = [
@@ -90,17 +93,17 @@ const images = [
   },
 ];
 
-export default function Doador({ user }) {
+export default function Doador() {
   const classes = useStyles();
 
   return (
     <Container>
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography align="center" variant="h3">
-            Olá, {user.nome}, que bom ter você aqui!
+        <Grid item xs={12} className={classes.center}>
+          <Typography variant="h3">
+            Olá, Fulano, que bom ter você aqui!
           </Typography>
-          <Typography align="center" variant="h3">
+          <Typography variant="h3">
             Escolha a opção mais adequada à você:
           </Typography>
         </Grid>
@@ -132,19 +135,19 @@ export default function Doador({ user }) {
           </Grid>
         ))}
 
-        <Grid item xs={12}>
-          <Typography align="center" variant="h3">
-            LOGO E NOME DO PROJETO
-          </Typography>
+        <Grid item xs={12} className={classes.center}>
+          <Typography variant="h3">LOGO E NOME DO PROJETO</Typography>
         </Grid>
       </Grid>
     </Container>
   );
 }
 
-export const getServerSideProps = async ({ req }) => {
-  const { token } = req.cookies;
-
+export const getServerSideProps = async ({
+  req: {
+    cookies: { token },
+  },
+}) => {
   if (!token)
     return {
       redirect: {
@@ -153,13 +156,5 @@ export const getServerSideProps = async ({ req }) => {
       },
     };
 
-  const { id } = req.cookies;
-
-  const { data } = await api.get(`perfil/doador/${id}`);
-
-  return {
-    props: {
-      user: data,
-    },
-  };
+  return { props: {} };
 };

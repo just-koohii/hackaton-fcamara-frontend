@@ -20,7 +20,6 @@ import api from '@services/api';
 
 const useStyles = makeStyles(({ spacing }) => ({
   paper: {
-    marginTop: spacing(10),
     width: spacing(45),
   },
   form: {
@@ -123,7 +122,7 @@ export function Form({ type, onSubmit }) {
             >
               <NextLink href={`/cadastro/${type}`} passHref>
                 <Link color="inherit" underline="hover">
-                  Não tem cadastro? Clique aqui
+                  Não tem cadastro?
                 </Link>
               </NextLink>
             </Typography>
