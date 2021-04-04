@@ -1,7 +1,7 @@
 import  React  from  'react' ;
 //import Buscacep from './login/querocomprar.jsx'
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import NearMeIcon from '@material-ui/icons/Nearme';
 import {  
     Button,
     Grid,
@@ -94,7 +94,11 @@ export default function listaLojas() {
                             title: classes.title,
                             padding: classes.gridListTile,
                          }}
-                         href="loja"
+                         actionIcon={
+                            <IconButton aria-label={`star ${tile.title}`} href="loja">
+                              <NearMeIcon className={classes.title} />
+                            </IconButton>
+                          }
                      />
                     </GridListTile>
                 ))}

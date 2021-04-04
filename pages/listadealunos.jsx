@@ -39,20 +39,25 @@ export default function listaAlunos() {
             </Typography>
             </Grid>
             <Grid className={classes.grid}>
-            <Button>
+            <Button href="escolaaluno">
                 <Avatar xs = {12}src="/broken-image.jpg" /><br></br>
+                <Typography>{faker.name.firstName()}</Typography>
             </Button>
-            <Button>
-                <Avatar xs = {6}src="/broken-image.jpg" /><br></br>
+            <Button href="escolaaluno">
+                <Avatar xs = {6}src="/broken-image.jpg"  /><br></br>
+                <Typography>{faker.name.firstName()}</Typography>
             </Button>
-            <Button>
-                <Avatar xs = {4}src="/broken-image.jpg" /><br></br>
+            <Button href="escolaaluno">
+                <Avatar xs = {4}src="/broken-image.jpg"  /><br></br>
+                <Typography>{faker.name.firstName()}</Typography>
             </Button>
-            <Button>
-                <Avatar xs = {2}src="/broken-image.jpg" /><br></br>
+            <Button href="escolaaluno">
+                <Avatar xs = {2}src="/broken-image.jpg"  /><br></br>
+                <Typography>{faker.name.firstName()}</Typography>
             </Button>
-            <Button>
-                <Avatar xs = {1}src="/broken-image.jpg" /><br></br>
+            <Button href="escolaaluno">
+                <Avatar xs = {1}src="/broken-image.jpg"  /><br></br>
+                <Typography>{faker.name.firstName()}</Typography>
             </Button>
             </Grid>
         <Grid className={classes.grid}>
