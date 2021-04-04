@@ -82,7 +82,7 @@ export function AuthMenu({ mobile = false, ...rest }) {
                           </NextLink>
                         </MenuItem>
                         <MenuItem>
-                          <NextLink href="/signup" passHref>
+                          <NextLink href="/cadastro" passHref>
                             <Link color="inherit" underline="none">
                               cadastrar
                             </Link>
@@ -124,7 +124,7 @@ export function AuthMenu({ mobile = false, ...rest }) {
             <ListItemText primary="login" />
           </ListItem>
 
-          <ListItem button href="/signup" {...rest}>
+          <ListItem button href="/cadastro" {...rest}>
             <ListItemText primary="cadastrar" />
           </ListItem>
         </>

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Box } from '@material-ui/core';
-import { LoginForm } from '@components/Form';
+import { SignUpForms } from '@components/Form';
 
 export default function Login() {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function Login() {
         alignItems="center"
         justifyContent="center"
       >
-        <LoginForm type={type} onSubmit={onSubmit} />
+        <SignUpForms type={type} onSubmit={onSubmit} />
       </Box>
     </>
   );
@@ -33,7 +33,7 @@ export const getServerSideProps = ({ req, params }) => {
     return {
       redirect: {
         permanent: false,
-        destination: '/login',
+        destination: '/cadastro',
       },
     };
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import {
   Paper,
@@ -17,6 +17,7 @@ import NextLink from 'next/link';
 import Cookie from 'js-cookie';
 import moment from 'moment';
 import api from '@services/api';
+import Address from '../../../Address';
 
 const useStyles = makeStyles(({ spacing }) => ({
   paper: {
@@ -26,42 +27,54 @@ const useStyles = makeStyles(({ spacing }) => ({
     padding: spacing(4),
   },
   signUp: {
-    marginTop: spacing(2),
+    marginBottom: spacing(2),
   },
 }));
 
-export function Form({ type, onSubmit }) {
+export function Pais({ type, onSubmit }) {
+  const [nomeMae, setNomeMae] = useState('');
+  const [nomePai, setNomePai] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [error, setError] = useState('');
   const [showPsw, setShowPsw] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
+  const [validateAddr, setValidateAddr] = useState(false);
   const [requesting, setRequesting] = useState(false);
+  const addressRef = useRef();
   const classes = useStyles();
 
   const toggleVisibility = () => setShowPsw(!showPsw);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setRequesting(true);
+
     api
-      .post(`login/${type}`, {
+      .post(`cadastro/${type}`, {
+        nome_mae: nomeMae,
+        nome_pai: nomePai,
         email,
         senha,
+        ...addressRef.current.onSubmit(),
       })
       .then(({ data }) => {
+        const secure = process.env.NODE_ENV === 'production';
+
         Cookie.set('id', data.id, {
           expires: moment().add(4, 'h').toDate(),
-          secure: process.env.NODE_ENV === 'production',
+          secure,
         });
 
         Cookie.set('type', type, {
           expires: moment().add(4, 'h').toDate(),
-          secure: process.env.NODE_ENV === 'production',
+          secure,
         });
 
         Cookie.set('token', data.token, {
           expires: moment().add(4, 'h').toDate(),
-          secure: process.env.NODE_ENV === 'production',
+          secure,
         });
 
         onSubmit();
@@ -70,10 +83,14 @@ export function Form({ type, onSubmit }) {
       .finally(() => setRequesting(false));
   };
 
+  useEffect(() => {
+    setDisableButton(!nomeMae || !email || !senha || validateAddr);
+  }, [nomeMae, email, senha, validateAddr]);
+
   return (
     <Paper elevation={3} className={classes.paper}>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {error && (
             <Grid item xs={12}>
               <Typography variant="body2" align="center" color="error">
@@ -81,6 +98,29 @@ export function Form({ type, onSubmit }) {
               </Typography>
             </Grid>
           )}
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              label="Nome da mãe"
+              placeholder="Nome da mãe"
+              type="text"
+              value={nomeMae}
+              onChange={({ target: { value } }) => setNomeMae(value)}
+              required
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              variant="outlined"
+              label="Nome do pai"
+              placeholder="Nome do pai"
+              type="text"
+              value={nomePai}
+              onChange={({ target: { value } }) => setNomePai(value)}
+              fullWidth
+            />
+          </Grid>
           <Grid item xs={12}>
             <TextField
               variant="outlined"
@@ -114,19 +154,21 @@ export function Form({ type, onSubmit }) {
               }}
               fullWidth
             />
+          </Grid>
 
+          <Address ref={addressRef} onChange={setValidateAddr}>
             <Typography
               color="primary"
               align="right"
               className={classes.signUp}
             >
-              <NextLink href={`/cadastro/${type}`} passHref>
+              <NextLink href={`/login/${type}`} passHref>
                 <Link color="inherit" underline="hover">
-                  Não tem cadastro?
+                  Já tem cadastro?
                 </Link>
               </NextLink>
             </Typography>
-          </Grid>
+          </Address>
 
           <Grid item xs={12}>
             <Button
@@ -134,7 +176,7 @@ export function Form({ type, onSubmit }) {
               color="primary"
               type="submit"
               size="large"
-              disabled={!email || !senha || requesting}
+              disabled={disableButton || requesting}
               fullWidth
             >
               {requesting ? <CircularProgress size={26} /> : 'Entrar'}
