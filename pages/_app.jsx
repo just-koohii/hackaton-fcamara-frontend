@@ -26,6 +26,8 @@ export default function MyApp({ Component, pageProps }) {
 
         <title>Elo</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <meta property="og:image" content="/favicon.ico" />
       </Head>
 
       <ThemeProvider theme={theme}>

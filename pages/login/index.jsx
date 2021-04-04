@@ -75,3 +75,16 @@ export default function preLogin() {
     </Container>
   );
 }
+
+export const getServerSideProps = ({ req }) => {
+  const { cookies } = req;
+
+  if (cookies.token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: `/dashboard/${cookies.type}`,
+      },
+    };
+  return { props: {} };
+};

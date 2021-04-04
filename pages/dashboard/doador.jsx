@@ -1,5 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
 import { Container, Grid, Typography, ButtonBase } from '@material-ui/core';
+import api from '@services/api';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   gridButton: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  focusVisible: {},
   imageButton: {
     position: 'absolute',
     left: 0,
@@ -73,10 +75,6 @@ const useStyles = makeStyles((theme) => ({
     left: 'calc(50% - 9px)',
     transition: theme.transitions.create('opacity'),
   },
-  center: {
-    alignContent: 'center',
-    textAlign: 'center',
-  },
 }));
 
 const images = [
@@ -92,25 +90,24 @@ const images = [
   },
 ];
 
-export default function Doador() {
+export default function Doador({ user }) {
   const classes = useStyles();
 
   return (
     <Container>
       <Grid container spacing={3}>
-        <Grid item xs={12} className={classes.center}>
-          <Typography variant="h3">
-            Olá, Fulano, que bom ter você aqui!
+        <Grid item xs={12}>
+          <Typography align="center" variant="h3">
+            Olá, {user.nome}, que bom ter você aqui!
           </Typography>
-          <Typography variant="h3">
+          <Typography align="center" variant="h3">
             Escolha a opção mais adequada à você:
           </Typography>
         </Grid>
 
         {images.map(({ url, title }) => (
-          <Grid item xs={12} md={6} className={classes.gridButton}>
+          <Grid key={title} item xs={12} md={6} className={classes.gridButton}>
             <ButtonBase
-              key={title}
               focusRipple
               className={classes.buttonBase}
               focusVisibleClassName={classes.focusVisible}
@@ -135,10 +132,34 @@ export default function Doador() {
           </Grid>
         ))}
 
-        <Grid item xs={12} className={classes.center}>
-          <Typography variant="h3">LOGO E NOME DO PROJETO</Typography>
+        <Grid item xs={12}>
+          <Typography align="center" variant="h3">
+            LOGO E NOME DO PROJETO
+          </Typography>
         </Grid>
       </Grid>
     </Container>
   );
 }
+
+export const getServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login',
+      },
+    };
+
+  const { id } = req.cookies;
+
+  const { data } = await api.get(`perfil/doador/${id}`);
+
+  return {
+    props: {
+      user: data,
+    },
+  };
+};

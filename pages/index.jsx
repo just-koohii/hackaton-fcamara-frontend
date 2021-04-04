@@ -1,11 +1,14 @@
-import { Typography, Container } from '@material-ui/core';
+import { Typography, Container, useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
+import Image from 'next/image';
 
 export default function Home() {
+  const { breakpoints } = useTheme();
+  const mobile = useMediaQuery(breakpoints.down('xs'));
+
   return (
     <>
-      <Typography align="center" variant="h1" gutterBottom>
-        Projeto FC
-      </Typography>
+      <Image src="/logo.svg" height={mobile ? 300 : 500} width={356} alt="" />
 
       <Typography align="center" variant="h3" gutterBottom>
         Sobre o Projeto
