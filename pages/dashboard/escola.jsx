@@ -82,7 +82,11 @@ export const getServerSideProps = async ({ req }) => {
 
   const { id } = req.cookies;
 
-  const { data } = await api.get(`perfil/escola/${id}`);
+  const { data } = await api.get(`perfil/escola/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return {
     props: {

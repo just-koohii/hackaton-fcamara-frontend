@@ -4,3 +4,4 @@ export * from './Form';
 export * from './AuthMenu';
 export * from './SignUpCard';
 export * from './NumberInput';
+export * from './StudentCard';
