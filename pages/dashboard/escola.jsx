@@ -1,71 +1,52 @@
-// import { makeStyles } from '@material-ui/core/styles';
-import {
-  Container,
-  Grid,
-  Typography,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-} from '@material-ui/core';
+import { useState } from 'react';
+import { Tabs, Tab } from '@material-ui/core';
+import { TabPanel } from '@components';
+import { StudentsList, MaterialsLists } from '@components/Dashboard/Escola';
+import { makeStyles } from '@material-ui/core/styles';
 import api from '@services/api';
 
-// const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    display: 'flex',
+    height: 224,
+  },
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
+  },
+}));
 
-export default function Doador({ user }) {
-  //  const classes = useStyles();
+export default function Doador({ students, lists }) {
+  const classes = useStyles();
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
-    <Container>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography align="center" variant="h3">
-            Olá, {user.nome}, que bom ter você aqui!
-          </Typography>
-          <Typography align="center" variant="h3">
-            Seus dados:
-          </Typography>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <List>
-            {Object.keys(user).map((key) => {
-              if (key !== 'id_endereco' && key !== 'endereco_escola')
-                return (
-                  <ListItem key={key}>
-                    <ListItemText
-                      primary={key.toUpperCase()}
-                      secondary={user[key]}
-                    />
-                  </ListItem>
-                );
-
-              return null;
-            })}
-          </List>
-          <Divider />
-          <Typography variant="h4" paragraph>
-            Endereço
-          </Typography>
-          <List>
-            {Object.keys(user.endereco_escola).map((key) => {
-              return (
-                <ListItem key={key}>
-                  <ListItemText
-                    primary={key.toUpperCase()}
-                    secondary={user.endereco_escola[key]}
-                  />
-                </ListItem>
-              );
-            })}
-          </List>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography align="center" variant="h3">
-            LOGO E NOME DO PROJETO
-          </Typography>
-        </Grid>
-      </Grid>
-    </Container>
+    <>
+      <div className={classes.root}>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          className={classes.tabs}
+          indicatorColor="primary"
+        >
+          <Tab label="Alunos" />
+          <Tab label="Listas" />
+        </Tabs>
+        <TabPanel value={value} index={0}>
+          <StudentsList students={students} />
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <MaterialsLists lists={lists} />
+        </TabPanel>
+      </div>
+    </>
   );
 }
 
@@ -82,11 +63,28 @@ export const getServerSideProps = async ({ req }) => {
 
   const { id } = req.cookies;
 
-  const { data } = await api.get(`perfil/escola/${id}`);
+  // const { data: user } = await api.get(`perfil/escola/${id}`, {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
+
+  const { data: students } = await api.get(`listar/escola/${id}/alunos`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const { data: lists } = await api.get(`listar/escola/${id}/listas`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return {
     props: {
-      user: data,
+      students,
+      lists,
     },
   };
 };
