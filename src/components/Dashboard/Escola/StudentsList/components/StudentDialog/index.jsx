@@ -18,12 +18,7 @@ export default function StudentDialog({ open, onClose, data }) {
   const classes = useStyles();
 
   const formatAddress = () => {
-    const {
-      logradouro,
-      numero,
-      cidade,
-      estado,
-    } = data.alunos_pais.endereco_pais;
+    const { logradouro, numero, cidade, estado } = data.pais.endereco;
 
     return `${logradouro}, ${numero}, ${cidade}, ${estado}`;
   };
@@ -40,21 +35,21 @@ export default function StudentDialog({ open, onClose, data }) {
               <ListItem>
                 <ListItemText
                   primary="Nome da mãe"
-                  secondary={data.alunos_pais.nome_mae}
+                  secondary={data.pais.nome_mae}
                 />
               </ListItem>
-              {data.alunos_pais.nome_pai && (
+              {data.pais.nome_pai && (
                 <ListItem>
                   <ListItemText
                     primary="Nome do pai"
-                    secondary={data.alunos_pais.nome_pai}
+                    secondary={data.pais.nome_pai}
                   />
                 </ListItem>
               )}
               <ListItem>
                 <ListItemText
                   primary="Email dos pais"
-                  secondary={data.alunos_pais.email}
+                  secondary={data.pais.email}
                 />
               </ListItem>
 

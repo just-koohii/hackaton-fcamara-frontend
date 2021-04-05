@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Tabs, Tab } from '@material-ui/core';
 import { TabPanel } from '@components';
-import { StudentsList } from '@components/Dashboard/Escola';
+import { StudentsList, MaterialsLists } from '@components/Dashboard/Escola';
 import { makeStyles } from '@material-ui/core/styles';
 import api from '@services/api';
 
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Doador({ students }) {
+export default function Doador({ students, lists }) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -37,17 +37,13 @@ export default function Doador({ students }) {
           indicatorColor="primary"
         >
           <Tab label="Alunos" />
-          <Tab label="Materiais" />
           <Tab label="Listas" />
         </Tabs>
         <TabPanel value={value} index={0}>
           <StudentsList students={students} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Materiais
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Listas
+          <MaterialsLists lists={lists} />
         </TabPanel>
       </div>
     </>
@@ -79,9 +75,16 @@ export const getServerSideProps = async ({ req }) => {
     },
   });
 
+  const { data: lists } = await api.get(`listar/escola/${id}/listas`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
   return {
     props: {
       students,
+      lists,
     },
   };
 };

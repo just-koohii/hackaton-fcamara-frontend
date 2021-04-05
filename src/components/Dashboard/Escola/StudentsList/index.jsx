@@ -21,7 +21,16 @@ export function StudentsList({ students }) {
   };
 
   const handleAddStudent = (newStudent) => {
-    setExtraData([...extraData, newStudent]);
+    setExtraData([
+      ...extraData,
+      {
+        id: newStudent.id,
+        nome: newStudent.nome,
+        pais: {
+          ...newStudent.alunos_pais,
+        },
+      },
+    ]);
     toggleAddDialog();
   };
 
