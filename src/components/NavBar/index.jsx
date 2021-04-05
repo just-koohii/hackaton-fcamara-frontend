@@ -51,10 +51,6 @@ const rotas = [
     href: '/',
   },
   {
-    nome: 'contato',
-    href: '/contato',
-  },
-  {
     nome: 'FAQ',
     href: '/faq',
   },
