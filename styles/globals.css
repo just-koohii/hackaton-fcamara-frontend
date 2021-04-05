@@ -13,5 +13,5 @@ body,#__next{
 
 main {
   flex: 1;
-  padding: 24px; 
+  padding: 24px 0;
 }
