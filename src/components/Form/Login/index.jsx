@@ -42,26 +42,30 @@ export function LoginForm({ type, onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setRequesting(true);
+
     api
       .post(`login/${type}`, {
         email,
         senha,
       })
       .then(({ data }) => {
+        const secure = process.env.NODE_ENV === 'production';
+
         Cookie.set('id', data.id, {
           expires: moment().add(4, 'h').toDate(),
-          secure: process.env.NODE_ENV === 'production',
+          secure,
         });
 
         Cookie.set('type', type, {
           expires: moment().add(4, 'h').toDate(),
-          secure: process.env.NODE_ENV === 'production',
+          secure,
         });
 
         Cookie.set('token', data.token, {
           expires: moment().add(4, 'h').toDate(),
-          secure: process.env.NODE_ENV === 'production',
+          secure,
         });
 
         onSubmit();
@@ -73,7 +77,7 @@ export function LoginForm({ type, onSubmit }) {
   return (
     <Paper elevation={3} className={classes.paper}>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           {error && (
             <Grid item xs={12}>
               <Typography variant="body2" align="center" color="error">

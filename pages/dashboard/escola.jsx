@@ -63,6 +63,7 @@ export const getServerSideProps = async ({ req }) => {
 
   const { id } = req.cookies;
 
+<<<<<<< HEAD
   // const { data: user } = await api.get(`perfil/escola/${id}`, {
   //   headers: {
   //     Authorization: `Bearer ${token}`,
@@ -76,6 +77,9 @@ export const getServerSideProps = async ({ req }) => {
   });
 
   const { data: lists } = await api.get(`listar/escola/${id}/listas`, {
+=======
+  const { data } = await api.get(`perfil/escola/${id}`, {
+>>>>>>> feature/dashboard-pais
     headers: {
       Authorization: `Bearer ${token}`,
     },
