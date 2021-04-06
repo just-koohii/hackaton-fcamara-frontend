@@ -5,9 +5,9 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableRow,
   TableContainer,
   TableHead,
-  TableRow,
 } from '@material-ui/core';
 import Icon from '@mdi/react';
 import { mdiWindowClose } from '@mdi/js';
@@ -24,7 +24,7 @@ const useStyles = makeStyles(({ spacing }) => ({
   },
 }));
 
-export default function MaterialsDialog({ onClose, open }) {
+export default function MaterialsDialog({ onClose, open, children }) {
   const classes = useStyles();
 
   return (
@@ -48,22 +48,7 @@ export default function MaterialsDialog({ onClose, open }) {
               <TableCell align="center">Doado</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                caderno
-              </TableCell>
-              <TableCell align="center">2</TableCell>
-              <TableCell align="center">1</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell component="th" scope="row">
-                caneta
-              </TableCell>
-              <TableCell align="center">2</TableCell>
-              <TableCell align="center">2</TableCell>
-            </TableRow>
-          </TableBody>
+          <TableBody>{children}</TableBody>
         </Table>
       </TableContainer>
     </Dialog>

@@ -5,6 +5,8 @@ import {
   CardActionArea,
   CardContent,
   Box,
+  TableCell,
+  TableRow,
   LinearProgress,
 } from '@material-ui/core';
 import { mdiAccount } from '@mdi/js';
@@ -31,9 +33,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function StudentCard({ nome, escola, cidade, estado, value }) {
-  const [open, setOpen] = useState(false);
+export function StudentCard({ nome, escola, cidade, estado, value, lists }) {
+  const [open, setOpen] = useState(!false);
   const classes = useStyles();
+
+  const findRequested = (data, id) => {
+    const {
+      ListaMaterial: { quantidade },
+    } = data.find((item) => item.id === id);
+
+    return quantidade;
+  };
 
   return (
     <>
@@ -62,7 +72,31 @@ export function StudentCard({ nome, escola, cidade, estado, value }) {
           </CardContent>
         </CardActionArea>
       </Card>
-      <MaterialsDialog open={open} onClose={() => setOpen(false)} />
+      <MaterialsDialog open={open} onClose={() => setOpen(false)}>
+        {lists?.map(
+          ({ doado, lista, material }) => {
+            return (
+              <TableRow>
+                <TableCell component="th" scope="row">
+                  {material.nome}
+                </TableCell>
+                <TableCell align="center">
+                  {findRequested(lista.material, material.id)}
+                </TableCell>
+                <TableCell align="center">{doado}</TableCell>
+              </TableRow>
+            );
+          }
+          // lista.forEach((item) => {
+          //   if (item.ano === current) {
+          //     // setDonated(donated + doado);
+          //     // lista.material.forEach(
+          //     //   ({ ListaMaterial }) => setTotal(total + ListaMaterial.quantidade) // (tempTot += ListaMaterial.quantidade)
+          //     // );
+          //   }
+          // }
+        )}
+      </MaterialsDialog>
     </>
   );
 }

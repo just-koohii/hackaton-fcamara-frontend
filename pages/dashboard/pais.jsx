@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Container, Grid, Typography, Box } from '@material-ui/core';
 import api from '@services/api';
 import { StudentCard } from '@components';
@@ -19,7 +20,25 @@ const useStyles = makeStyles(({ spacing }) => ({
 }));
 
 export default function Pais({ data }) {
+  const [total, setTotal] = useState(0);
+  const [donated, setDonated] = useState(0);
+
   const classes = useStyles();
+
+  useEffect(() => {
+    const current = new Date().getFullYear();
+
+    data?.map((item) =>
+      item.listas.forEach(({ doado, lista }) => {
+        if (lista.ano === current) {
+          setDonated(donated + doado);
+          lista.material.forEach(
+            ({ ListaMaterial }) => setTotal(total + ListaMaterial.quantidade) // (tempTot += ListaMaterial.quantidade)
+          );
+        }
+      })
+    );
+  }, []);
 
   return (
     <Box className={classes.container}>
@@ -30,18 +49,23 @@ export default function Pais({ data }) {
       {data.length > 0 ? (
         <Container>
           <Grid container spacing={4}>
-            {data.map((item) => (
-              <Grid key={item.id} item xs={12} md={4}>
-                <StudentCard
-                  id={item.id}
-                  nome={item.nome}
-                  escola={item.alunos_escola.nome}
-                  cidade={item.alunos_escola.endereco_escola.cidade}
-                  estado={item.alunos_escola.endereco_escola.estado}
-                  value={item.id * 10}
-                />
-              </Grid>
-            ))}
+            {data?.map((item) => {
+              return (
+                <Grid key={item.id} item xs={12} md={4}>
+                  <StudentCard
+                    id={item.id}
+                    nome={item.nome}
+                    escola={item.escola.nome}
+                    cidade={item.escola.endereco.cidade}
+                    estado={item.escola.endereco.estado}
+                    lists={item.listas}
+                    value={
+                      total === 0 ? 0 : ((donated / total) * 100).toFixed(1)
+                    }
+                  />
+                </Grid>
+              );
+            })}
           </Grid>
         </Container>
       ) : (
