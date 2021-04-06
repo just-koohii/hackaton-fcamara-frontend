@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export function StudentCard({ nome, escola, cidade, estado, value, lists }) {
-  const [open, setOpen] = useState(!false);
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
 
   const findRequested = (data, id) => {
@@ -75,17 +75,18 @@ export function StudentCard({ nome, escola, cidade, estado, value, lists }) {
       <MaterialsDialog open={open} onClose={() => setOpen(false)}>
         {lists?.map(
           ({ doado, lista, material }) => {
-            return (
-              <TableRow>
-                <TableCell component="th" scope="row">
-                  {material.nome}
-                </TableCell>
-                <TableCell align="center">
-                  {findRequested(lista.material, material.id)}
-                </TableCell>
-                <TableCell align="center">{doado}</TableCell>
-              </TableRow>
-            );
+            const solicitado = findRequested(lista.material, material.id);
+            if (solicitado !== 0)
+              return (
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    {material.nome}
+                  </TableCell>
+                  <TableCell align="center">{solicitado}</TableCell>
+                  <TableCell align="center">{doado}</TableCell>
+                </TableRow>
+              );
+            return null;
           }
           // lista.forEach((item) => {
           //   if (item.ano === current) {

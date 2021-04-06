@@ -18,6 +18,7 @@ const useStyles = makeStyles({
 });
 
 export default function ListDialog({ open, onClose, data }) {
+  console.log(data);
   const classes = useStyles();
 
   return (

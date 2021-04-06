@@ -50,9 +50,18 @@ export default function preLogin() {
             draggable
             pauseOnHover
           >
-            <img src="https://placekitten.com/200/300" alt="gato 1" />
-            <img src="https://placekitten.com/300/300" alt="gato 2" />
-            <img src="https://placekitten.com/400/300" alt="gato 3" />
+            <img
+              src="https://media.istockphoto.com/photos/elearning-online-education-or-internet-encyclopedia-concept-open-and-picture-id1263424631?b=1&k=6&m=1263424631&s=170667a&w=0&h=4VHhpTVLA5BWJVM0UCm8qFo5SikZ1o4hVwuJtonrRW4="
+              alt="img 1"
+            />
+            <img
+              src="https://media.istockphoto.com/photos/school-classroom-in-blur-background-without-young-student-blurry-view-picture-id959622488?b=1&k=6&m=959622488&s=170667a&w=0&h=tmEyP4Oo0EcEqXB4qB1QtvhOCfE-dD3vvJhTqqyXaKs="
+              alt="gato 2"
+            />
+            <img
+              src="https://media.istockphoto.com/photos/back-to-school-concept-background-picture-id1165403721?b=1&k=6&m=1165403721&s=170667a&w=0&h=SwCAzs_pq8TvjAIctWzejIJNZvoz6gss9rFXOyrMEO4="
+              alt="img 3"
+            />
           </Carousel>
         </Grid>
         <Grid item xs={12} md={4}>

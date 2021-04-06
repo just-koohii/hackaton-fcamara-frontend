@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 });
 
 export default function ListDialog({ open, onClose, onSubmit }) {
-  const [ano, setAno] = useState(new Date().getFullYear() + 1);
+  const [ano, setAno] = useState(new Date().getFullYear());
   const [materials, setMaterials] = useState([]);
   const [error, setError] = useState('');
   const [requesting, setRequesting] = useState(false);

@@ -10,10 +10,10 @@ import {
   GridList,
   GridListTile,
   GridListTileBar,
-  IconButton,
 } from '@material-ui/core';
+import api from '@services/api';
 
-export default function listaLojas() {
+export default function listaLojas({ user }) {
   const useStyles = makeStyles(({ spacing }) => ({
     gridList: {
       flexWrap: 'nowrap',
@@ -81,8 +81,8 @@ export default function listaLojas() {
     >
       <Grid xs={12} md={12} className={classes.form}>
         <Typography variant="h5">
-          Fulano, listaremos as lojas parceiras do projeto. Todas elas oferecem
-          descontos para os produtos a serem doados e efetuam a entrega
+          {user.nome}, listaremos as lojas parceiras do projeto. Todas elas
+          oferecem descontos para os produtos a serem doados e efetuam a entrega
           diretamente na escola escolhida.
         </Typography>
       </Grid>
@@ -113,3 +113,29 @@ export default function listaLojas() {
     </Box>
   );
 }
+
+export const getServerSideProps = async ({ req }) => {
+  const { token } = req.cookies;
+
+  if (!token)
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login',
+      },
+    };
+
+  const { id } = req.cookies;
+
+  const { data } = await api.get(`perfil/doador/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return {
+    props: {
+      user: data,
+    },
+  };
+};

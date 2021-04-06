@@ -27,7 +27,7 @@ export function StudentsList({ students }) {
         id: newStudent.id,
         nome: newStudent.nome,
         pais: {
-          ...newStudent.alunos_pais,
+          ...newStudent.pais,
         },
       },
     ]);
